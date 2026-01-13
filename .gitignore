@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Photo files (user adds their own photos locally)
+public/photos/*.jpg
+public/photos/*.jpeg
+public/photos/*.png
+public/photos/*.heic
+public/photos/*.heif
+public/photos/*.tiff
+public/photos/*.tif
+public/photos/*.JPG
+public/photos/*.JPEG
+public/photos/*.PNG
+public/photos/*.HEIC
+
+# Generated manifest and cache (auto-generated on dev/build)
+public/photos/manifest.json
+public/photos/.manifest-cache.json

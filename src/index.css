@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Safe area insets for notched devices (iPhone X+, etc.) */
+:root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+}
+
+html {
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%);
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    overscroll-behavior: none;
+
+    /* Apply safe area padding */
+    padding-top: var(--sat);
+    padding-bottom: var(--sab);
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+
+    /* Prevent text selection on mobile for game elements */
+    -webkit-user-select: none;
+    user-select: none;
+
+    /* Prevent tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow text selection in input fields */
+input, textarea {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Improve touch targets for mobile */
+button, [role="button"] {
+    touch-action: manipulation;
+}
+
+/* Fix for iOS input zoom */
+@supports (-webkit-touch-callout: none) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Capacitor-specific styles */
+.capacitor-ios {
+    /* iOS-specific adjustments */
+}
+
+.capacitor-android {
+    /* Android-specific adjustments */
+}
+
+/* Status bar area for fullscreen apps */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .safe-area-top {
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
