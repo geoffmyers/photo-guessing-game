@@ -5,13 +5,14 @@ A fun two-player party game where players take turns guessing when or where phot
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/screenshot-1.jpg" width="400" alt="Setup screen">
-  <img src="screenshots/screenshot-2.jpg" width="400" alt="Game board">
+  <img src="screenshots/screenshot-1.jpg" width="270" alt="Setup screen">
+  <img src="screenshots/screenshot-2.jpg" width="270" alt="Game board">
+  <img src="screenshots/screenshot-3.jpg" width="270" alt="Photo display">
 </p>
 <p align="center">
-  <img src="screenshots/screenshot-3.jpg" width="250" alt="Year selector">
-  <img src="screenshots/screenshot-4.jpg" width="250" alt="Month selector">
-  <img src="screenshots/screenshot-5.jpg" width="250" alt="Feedback overlay">
+  <img src="screenshots/screenshot-4.jpg" width="270" alt="Year selector">
+  <img src="screenshots/screenshot-5.jpg" width="270" alt="Month selector">
+  <img src="screenshots/screenshot-6.jpg" width="270" alt="Feedback overlay">
 </p>
 
 ## Features
