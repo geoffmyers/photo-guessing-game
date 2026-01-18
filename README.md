@@ -2,6 +2,18 @@
 
 A fun two-player party game where players take turns guessing when or where photos were taken. Test your memory and observation skills with photos from your own library!
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/screenshot-1.jpg" width="400" alt="Setup screen">
+  <img src="screenshots/screenshot-2.jpg" width="400" alt="Game board">
+</p>
+<p align="center">
+  <img src="screenshots/screenshot-3.jpg" width="250" alt="Year selector">
+  <img src="screenshots/screenshot-4.jpg" width="250" alt="Month selector">
+  <img src="screenshots/screenshot-5.jpg" width="250" alt="Feedback overlay">
+</p>
+
 ## Features
 
 - **Two Game Modes**
@@ -80,17 +92,17 @@ Open http://localhost:5173 in your browser.
 
 ## Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
+| Script                      | Description                            |
+| --------------------------- | -------------------------------------- |
+| `npm run dev`               | Start development server               |
+| `npm run build`             | Build for production                   |
+| `npm run preview`           | Preview production build               |
 | `npm run generate-manifest` | Generate photo manifest from EXIF data |
-| `npm run cap:sync` | Build and sync to native projects |
-| `npm run cap:ios` | Build and open in Xcode |
-| `npm run cap:android` | Build and open in Android Studio |
-| `npm run cap:run:ios` | Build and run on iOS device |
-| `npm run cap:run:android` | Build and run on Android device |
+| `npm run cap:sync`          | Build and sync to native projects      |
+| `npm run cap:ios`           | Build and open in Xcode                |
+| `npm run cap:android`       | Build and open in Android Studio       |
+| `npm run cap:run:ios`       | Build and run on iOS device            |
+| `npm run cap:run:android`   | Build and run on Android device        |
 
 ## Mobile Development
 
@@ -107,6 +119,7 @@ npm run cap:run:ios
 ```
 
 Requirements:
+
 - macOS with Xcode 14+
 - iOS Simulator or physical device
 - Apple Developer account (for device testing)
@@ -122,21 +135,22 @@ npm run cap:run:android
 ```
 
 Requirements:
+
 - Android Studio with SDK 33+
 - Android Emulator or physical device
 
 ## Technology Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | React 18 + Vite |
-| Language | JavaScript/TypeScript |
-| Styling | Tailwind CSS |
-| Animations | Framer Motion |
-| State | Zustand with persistence |
-| Audio | Web Audio API (synthesized) |
-| Mobile | Capacitor 8 |
-| EXIF | exifr library |
+| Category   | Technology                  |
+| ---------- | --------------------------- |
+| Framework  | React 18 + Vite             |
+| Language   | JavaScript/TypeScript       |
+| Styling    | Tailwind CSS                |
+| Animations | Framer Motion               |
+| State      | Zustand with persistence    |
+| Audio      | Web Audio API (synthesized) |
+| Mobile     | Capacitor 8                 |
+| EXIF       | exifr library               |
 
 ## Project Structure
 
@@ -179,7 +193,7 @@ Photo manifest files (`manifest.json`, `.manifest-cache.json`) contain extracted
 
 ## License
 
-GPL-2.0 License - See [LICENSE](LICENSE) for details.
+GPL-2.0 License - See [LICENSE.md](LICENSE.md) for details.
 
 ## Author
 
