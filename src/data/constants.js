@@ -1,8 +1,10 @@
-// Game configuration constants
+// Game configuration - loaded from shared JSON
+// Source: shared/photo-guessing-game/data/game-config.json
+import sharedConfig from '../../../../shared/photo-guessing-game/data/game-config.json';
 
 export const GAME_CONFIG = {
-  WINNING_SCORE: 10,
-  MIN_PHOTOS_TO_START: 3,
+  WINNING_SCORE: sharedConfig.game.winningScore,
+  MIN_PHOTOS_TO_START: sharedConfig.game.minimumPhotosRequired,
 
   // Game modes
   MODES: {
@@ -13,13 +15,13 @@ export const GAME_CONFIG = {
   // Scoring (same for both modes)
   POINTS: {
     // Date mode
-    YEAR: 1,
-    MONTH: 2,  // Additional points for month (total 3)
-    DAY: 3,    // Additional points for day (total 6)
+    YEAR: sharedConfig.scoring.date.year.points,
+    MONTH: sharedConfig.scoring.date.month.points,
+    DAY: sharedConfig.scoring.date.day.points,
     // Location mode
-    COUNTRY: 1,
-    STATE: 2,  // Additional points for state (total 3)
-    CITY: 3    // Additional points for city (total 6)
+    COUNTRY: sharedConfig.scoring.location.country.points,
+    STATE: sharedConfig.scoring.location.state.points,
+    CITY: sharedConfig.scoring.location.city.points
   },
 
   // Game phases
@@ -45,4 +47,7 @@ export const GAME_CONFIG = {
   }
 };
 
-export const FEEDBACK_DURATION = 2000; // ms to show feedback overlay
+export const FEEDBACK_DURATION = sharedConfig.game.feedbackDurationMs;
+
+// Export shared config for direct access
+export { sharedConfig };
