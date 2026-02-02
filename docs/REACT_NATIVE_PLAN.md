@@ -1,5 +1,7 @@
 # React Native Implementation Plan for Photo Guessing Game
 
+> **GitHub Issue:** [#219 — Photo Guessing Game: React Native mobile app implementation](https://github.com/geoffmyers/geoff-myers-mono-repo/issues/219)
+
 This document outlines a comprehensive plan to implement a React Native mobile version alongside the existing React.js web version of the Photo Guessing Game.
 
 ---
