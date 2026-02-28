@@ -1,3 +1,11 @@
+---
+title: Capacitor Implementation Plan for Photo Guessing Game
+created: 2026-01-18
+modified: 2026-02-12
+description: "This document outlines a simpler alternative to the full React Native rewrite: using Capacitor to package the existing React.js web app as a native iOS/Android app."
+tags: [react]
+---
+
 # Capacitor Implementation Plan for Photo Guessing Game
 
 > **GitHub Issue:** [#300 — Photo Guessing Game: Capacitor mobile app implementation](https://github.com/geoffmyers/geoff-myers-mono-repo/issues/300)

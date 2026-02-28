@@ -1,3 +1,11 @@
+---
+title: Photo Guessing Game
+created: 2026-01-18
+modified: 2026-01-18
+description: "A fun two-player party game where players take turns guessing when or where photos were taken. Test your memory and observation skills with photos from your own library!"
+tags: [react, readme]
+---
+
 # Photo Guessing Game
 
 A fun two-player party game where players take turns guessing when or where photos were taken. Test your memory and observation skills with photos from your own library!

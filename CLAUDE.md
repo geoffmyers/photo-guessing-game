@@ -1,3 +1,11 @@
+---
+title: CLAUDE.md - Photo Guessing Game
+created: 2026-01-18
+modified: 2026-01-18
+description: Technical guidance for AI assistants working on this codebase.
+tags: [react, claude]
+---
+
 # CLAUDE.md - Photo Guessing Game
 
 Technical guidance for AI assistants working on this codebase.
