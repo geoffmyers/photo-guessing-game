@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Photo Guessing Game</string>
+    <string name="title_activity_main">Photo Guessing Game</string>
+    <string name="package_name">com.geoffmyers.photoguessinggame</string>
+    <string name="custom_url_scheme">com.geoffmyers.photoguessinggame</string>
+</resources>

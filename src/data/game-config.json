@@ -1,0 +1,87 @@
+{
+  "description": "Photo Guessing Game configuration and rules",
+  "version": "1.0.0",
+
+  "game": {
+    "winningScore": 10,
+    "minimumPhotosRequired": 3,
+    "maxPhotosToLoad": 30,
+    "feedbackDurationMs": 2000,
+    "perfectScore": 6
+  },
+
+  "modes": [
+    {
+      "id": "date",
+      "name": "When Was It?",
+      "description": "Guess the year, month, and day the photo was taken",
+      "icon": "calendar",
+      "phases": ["year", "month", "day"]
+    },
+    {
+      "id": "location",
+      "name": "Where Was It?",
+      "description": "Guess the country, state, and city where the photo was taken",
+      "icon": "map",
+      "phases": ["country", "state", "city"]
+    }
+  ],
+
+  "scoring": {
+    "date": {
+      "year": { "points": 1, "cumulative": 1, "description": "Correct year" },
+      "month": { "points": 2, "cumulative": 3, "description": "Correct month" },
+      "day": { "points": 3, "cumulative": 6, "description": "Correct day" }
+    },
+    "location": {
+      "country": { "points": 1, "cumulative": 1, "description": "Correct country" },
+      "state": { "points": 2, "cumulative": 3, "description": "Correct state/region" },
+      "city": { "points": 3, "cumulative": 6, "description": "Correct city" }
+    }
+  },
+
+  "gamePhases": ["setup", "playing", "feedback", "victory", "no_photos"],
+
+  "turnRules": {
+    "playerCount": 2,
+    "alternatingTurns": true,
+    "pointsAccumulate": true,
+    "wrongAnswerEndsTurn": true,
+    "wrongAnswerKeepsAccumulatedPoints": true
+  },
+
+  "victoryCondition": {
+    "type": "first_to_score",
+    "score": 10,
+    "tieBreakerEnabled": true,
+    "tieBreakerRule": "If player 1 reaches winning score first, player 2 gets equal number of turns to match or exceed"
+  },
+
+  "optionGeneration": {
+    "yearOptions": 8,
+    "yearRange": 20,
+    "locationOptions": 5
+  },
+
+  "geocoding": {
+    "provider": "nominatim",
+    "baseUrl": "https://nominatim.openstreetmap.org/reverse",
+    "rateLimitMs": 1100,
+    "zoom": 10,
+    "language": "en",
+    "addressPriority": {
+      "state": ["state", "province", "region"],
+      "city": ["city", "town", "village", "municipality", "county"]
+    }
+  },
+
+  "exifFields": {
+    "dateFieldPriority": ["DateTimeOriginal", "CreateDate", "DateTime", "DateTimeDigitized"],
+    "gpsFields": {
+      "latitude": "GPSLatitude",
+      "longitude": "GPSLongitude",
+      "latitudeRef": "GPSLatitudeRef",
+      "longitudeRef": "GPSLongitudeRef"
+    }
+  }
+}
