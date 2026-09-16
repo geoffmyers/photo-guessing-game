@@ -97,11 +97,13 @@ jobs:
           npm ci
           npm run build
           npx cap sync ios
-          # The project shares no scheme, so build the target (Swift packages resolve either way).
-          xcodebuild -project ios/App/App.xcodeproj -target App -sdk iphoneos -configuration Release \
+          # The project shares no scheme, so build its (only) target, whatever it is named.
+          target="$(xcodebuild -list -json -project ios/App/App.xcodeproj \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["project"]["targets"][0])')"
+          xcodebuild -project ios/App/App.xcodeproj -target "$target" -sdk iphoneos -configuration Release \
             SYMROOT="$PWD/build" CODE_SIGNING_ALLOWED=NO build
           mkdir -p Payload
-          cp -R build/Release-iphoneos/App.app Payload/
+          cp -R build/Release-iphoneos/*.app Payload/
           zip -qry "$NAME-$VERSION-ios-unsigned.ipa" Payload
       - uses: actions/upload-artifact@v4
         with:
