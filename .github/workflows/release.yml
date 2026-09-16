@@ -97,10 +97,11 @@ jobs:
           npm ci
           npm run build
           npx cap sync ios
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -sdk iphoneos -configuration Release \
-            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+          # The project shares no scheme, so build the target (Swift packages resolve either way).
+          xcodebuild -project ios/App/App.xcodeproj -target App -sdk iphoneos -configuration Release \
+            SYMROOT="$PWD/build" CODE_SIGNING_ALLOWED=NO build
           mkdir -p Payload
-          cp -R build/Build/Products/Release-iphoneos/App.app Payload/
+          cp -R build/Release-iphoneos/App.app Payload/
           zip -qry "$NAME-$VERSION-ios-unsigned.ipa" Payload
       - uses: actions/upload-artifact@v4
         with:
