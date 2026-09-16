@@ -36,6 +36,25 @@ node --check electron/main.cjs electron/preload.cjs electron/menu.cjs
 
 <!-- CHECKS:END -->
 
+<!-- RELEASES:START -->
+### Releases
+
+Every push to `main` runs the release workflow
+([`.github/workflows/release.yml`](.github/workflows/release.yml)). It reads the version with
+
+```bash
+jq -r .version package.json
+```
+
+and, if `v<version>` has no release yet, builds these and publishes them as
+a GitHub Release. To release, raise the version.
+
+- **macOS app** (macOS with Xcode): `*.zip`
+- **iOS app** (macOS with Xcode): `*.ipa`
+- **Android app** (Ubuntu with the Android SDK and JDK 21): `*.apk`
+
+<!-- RELEASES:END -->
+
 There is no automated test suite yet, so before pushing also:
 
 - play a round of each mode you touched, in the browser and, if you changed

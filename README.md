@@ -150,6 +150,11 @@ For the desktop app:
 
 ## Installation
 
+Ready-made apps are on the
+[Releases](https://github.com/geoffmyers/photo-guessing-game/releases/latest)
+page: the macOS app (Apple silicon and Intel), an unsigned iOS build to sign
+yourself, and a debug-signed Android APK.
+
 ```bash
 git clone https://github.com/geoffmyers/photo-guessing-game.git
 cd photo-guessing-game
