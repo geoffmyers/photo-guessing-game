@@ -50,6 +50,10 @@ One React code base runs in three places:
 - as a macOS desktop app ([Electron](https://www.electronjs.org/)), with photos
   picked from disk.
 
+**Play the web version at
+[photo-guessing-game.geoffmyers.com](https://photo-guessing-game.geoffmyers.com)**,
+with public-domain photos from Wikimedia Commons in place of your own.
+
 The dates come from each photo's EXIF metadata. The places come from its GPS
 position, looked up through OpenStreetMap's Nominatim service.
 
@@ -178,10 +182,18 @@ The web version plays the photos in `public/photos/`:
    `npm run generate-manifest -- --force` to redo them all, for example after
    changing the place-name language.
 
+A production build (`npm run build`) plays the photos it was built with, so it
+shows neither this hint nor a reload button.
+
 Photos and the manifest are ignored by git. To get place names in another
 language, set `geocoding.language` in `src/data/game-config.json` (or the
 `GEOCODE_LANGUAGE` environment variable for one run) to a language code such as
 `fr`.
+
+A build that ships someone else's photos should credit them. Set
+`VITE_PHOTO_CREDITS_URL` when building (for example
+`VITE_PHOTO_CREDITS_URL=/credits.html npm run build`) and the setup screen links
+to that page.
 
 ### Setting up a game
 

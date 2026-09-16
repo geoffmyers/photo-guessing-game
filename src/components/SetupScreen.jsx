@@ -7,6 +7,10 @@ import { GAME_CONFIG } from '../data/constants';
 import { formatPoints } from '../utils/dateUtils';
 import { fadeInUp, bounceIn, staggerContainer, staggerItem } from '../utils/animations';
 
+// Optional, set at build time: a page crediting the photos a web build ships
+// with (the public demo uses Wikimedia Commons photos).
+const PHOTO_CREDITS_URL = import.meta.env.VITE_PHOTO_CREDITS_URL;
+
 const SetupScreen = () => {
   const players = useGameStore((state) => state.players);
   const setPlayerName = useGameStore((state) => state.setPlayerName);
@@ -249,6 +253,14 @@ const SetupScreen = () => {
           <Play className="w-6 h-6" />
           Start {gameMode === GAME_CONFIG.MODES.LOCATION ? 'Location' : 'Date'} Game
         </motion.button>
+
+        {PHOTO_CREDITS_URL && (
+          <p className="mt-4 text-center text-xs text-white/50">
+            <a href={PHOTO_CREDITS_URL} className="underline hover:text-white/80">
+              Photo credits
+            </a>
+          </p>
+        )}
       </motion.div>
     </div>
   );

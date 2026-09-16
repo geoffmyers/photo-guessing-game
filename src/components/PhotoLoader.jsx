@@ -9,6 +9,10 @@ import { extractMetadataFromPhotos } from '../services/exifService';
 import { GAME_CONFIG } from '../data/constants';
 import useHaptics from '../hooks/useHaptics';
 
+// A production web build serves a fixed photo set: the add-photos hint and the
+// reload button are for the dev server, where public/photos/ can change.
+const IS_DEV_SERVER = import.meta.env.DEV;
+
 const PhotoLoader = () => {
   const allPhotos = useGameStore((state) => state.allPhotos);
   const loadPhotos = useGameStore((state) => state.loadPhotos);
@@ -167,7 +171,7 @@ const PhotoLoader = () => {
               : loading
                 ? isNative
                   ? 'Selecting photos...'
-                  : 'Loading photos from public/photos...'
+                  : 'Loading photos...'
                 : allPhotos.length > 0
                   ? `${allPhotos.length} photos loaded`
                   : isNative
@@ -176,7 +180,7 @@ const PhotoLoader = () => {
             }
           </div>
 
-          {!loading && !extractingMetadata && (
+          {!loading && !extractingMetadata && (isNative || IS_DEV_SERVER) && (
             <div className="text-white/50 text-sm">
               {isNative ? (
                 'Tap below to select photos with date/location data'
@@ -189,7 +193,7 @@ const PhotoLoader = () => {
       </motion.div>
 
       {/* Action button */}
-      {!loading && !extractingMetadata && (
+      {!loading && !extractingMetadata && (isNative || IS_DEV_SERVER) && (
         <motion.button
           onClick={isNative ? handleSelectPhotos : loadFromManifest}
           className="mt-3 w-full flex items-center justify-center gap-2 py-3 px-4
