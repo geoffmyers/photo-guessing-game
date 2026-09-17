@@ -47,7 +47,8 @@ jq -r .version package.json
 ```
 
 and, if `v<version>` has no release yet, builds these and publishes them as
-a GitHub Release. To release, raise the version.
+a [GitHub Release](https://github.com/geoffmyers/photo-guessing-game/releases).
+To release, raise the version.
 
 - **macOS app** (macOS with Xcode): `*.zip`
 - **iOS app** (macOS with Xcode): `*.ipa`
