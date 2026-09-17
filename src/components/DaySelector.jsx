@@ -55,10 +55,12 @@ const DaySelector = ({ onSelect }) => {
       </div>
 
       {/* Day of week headers */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div role="row" className="grid grid-cols-7 gap-1 mb-2">
         {DAY_HEADERS.map((header) => (
           <div
             key={header}
+            role="columnheader"
+            aria-label={header}
             className="text-center text-white/60 text-xs font-medium py-1"
           >
             {header}
@@ -71,19 +73,24 @@ const DaySelector = ({ onSelect }) => {
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
+        role="grid"
+        aria-label={`Day, ${MONTH_NAMES[month - 1]} ${year}`}
         className="grid grid-cols-7 gap-1"
       >
         {calendarCells.map(({ day, key }) => (
           day === null ? (
-            <div key={key} className="py-2" />
+            <div key={key} role="gridcell" aria-hidden="true" className="py-2" />
           ) : (
             <motion.button
               key={key}
               variants={staggerItem}
+              role="gridcell"
               onClick={() => onSelect(day)}
+              aria-label={`${MONTH_NAMES[month - 1]} ${day}, ${year}`}
               className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40
                          rounded-lg py-2 text-white font-medium text-sm
-                         transition-colors duration-150"
+                         transition-colors duration-150
+                         focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >

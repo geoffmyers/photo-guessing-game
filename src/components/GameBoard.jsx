@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { RotateCcw, ImageOff } from 'lucide-react';
 import useGameStore from '../stores/gameStore';
@@ -5,8 +6,11 @@ import PlayerPanel from './PlayerPanel';
 import PhotoDisplay from './PhotoDisplay';
 import GuessingInterface from './GuessingInterface';
 import FeedbackOverlay from './FeedbackOverlay';
-import VictoryScreen from './VictoryScreen';
 import { fadeInUp, bounceIn } from '../utils/animations';
+
+// Shown once per game (or never), so it is split into its own chunk instead
+// of the initial bundle everyone downloads to see the setup screen.
+const VictoryScreen = lazy(() => import('./VictoryScreen'));
 
 const GameBoard = () => {
   const gamePhase = useGameStore((state) => state.gamePhase);
@@ -85,13 +89,20 @@ const GameBoard = () => {
 
       {/* Overlays */}
       <FeedbackOverlay />
-      {gamePhase === 'victory' && <VictoryScreen />}
+      {gamePhase === 'victory' && (
+        <Suspense fallback={null}>
+          <VictoryScreen />
+        </Suspense>
+      )}
 
       {/* No Photos Left Overlay */}
       {gamePhase === 'no_photos' && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="no-photos-title"
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
         >
           <motion.div
@@ -101,7 +112,7 @@ const GameBoard = () => {
             className="max-w-md w-full bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 text-center"
           >
             <ImageOff className="w-16 h-16 text-white mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-2">All Photos Used!</h2>
+            <h2 id="no-photos-title" className="text-2xl font-bold text-white mb-2">All Photos Used!</h2>
             <p className="text-white/80 mb-6">
               You've gone through all available photos without a winner.
             </p>

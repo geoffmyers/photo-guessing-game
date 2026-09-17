@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, ArrowRight, Sparkles, Star, AlertTriangle } from 'lucide-react';
 import useGameStore from '../stores/gameStore';
@@ -97,6 +97,9 @@ const FeedbackOverlay = () => {
   const nextPlayer = players[(currentPlayerIndex + 1) % 2];
   const isLocationMode = gameMode === GAME_CONFIG.MODES.LOCATION;
 
+  const titleId = 'feedback-overlay-title';
+  const continueButtonRef = useRef(null);
+
   // Play sound effect and haptic feedback when overlay appears
   useEffect(() => {
     if (isVisible) {
@@ -112,6 +115,22 @@ const FeedbackOverlay = () => {
 
   const handleContinue = () => {
     endTurn();
+  };
+
+  // Focus the Continue button when the dialog opens, so keyboard and screen
+  // reader users land somewhere useful instead of on whatever was focused
+  // behind the overlay.
+  useEffect(() => {
+    if (isVisible) {
+      continueButtonRef.current?.focus();
+    }
+  }, [isVisible]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
+      event.preventDefault();
+      handleContinue();
+    }
   };
 
   // Format the correct answer based on mode
@@ -142,6 +161,10 @@ const FeedbackOverlay = () => {
               initial="hidden"
               animate={lastGuessCorrect ? "visible" : "animate"}
               exit="exit"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              onKeyDown={handleKeyDown}
               className={`
                 relative max-w-md w-full rounded-2xl p-8 text-center overflow-hidden
                 ${lastGuessCorrect
@@ -211,6 +234,7 @@ const FeedbackOverlay = () => {
 
               {/* Title with color animation */}
               <motion.h2
+                id={titleId}
                 className="text-3xl font-bold text-white mb-2 drop-shadow-lg"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -330,6 +354,7 @@ const FeedbackOverlay = () => {
 
               {/* Continue button */}
               <motion.button
+                ref={continueButtonRef}
                 onClick={handleContinue}
                 className="relative bg-white text-gray-800 font-bold px-10 py-4 rounded-xl
                            shadow-lg overflow-hidden group"

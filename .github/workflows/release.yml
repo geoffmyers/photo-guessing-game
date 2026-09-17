@@ -63,7 +63,7 @@ jobs:
           npm ci
           npm run build
           npx electron-builder --mac dir --arm64 --x64 --publish never -c.mac.identity=null
-          # electron-builder 25 cannot ad-hoc sign, and Apple silicon runs nothing unsigned.
+          # identity=null leaves the app unsigned, and Apple silicon runs nothing unsigned: sign ad hoc.
           for app in release/mac*/"Photo Guessing Game.app"; do
             case "$app" in *arm64*) arch=arm64 ;; *) arch=x64 ;; esac
             codesign --force --deep --sign - "$app"

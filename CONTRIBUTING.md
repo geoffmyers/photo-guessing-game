@@ -26,10 +26,11 @@ Every push and pull request runs these checks in GitHub Actions
 ([`.github/workflows/checks.yml`](.github/workflows/checks.yml)), and every release has passed them.
 To run one yourself, use the same commands from the directory shown.
 
-**build** (Node.js 22, from the repository root):
+**build and test** (Node.js 22, from the repository root):
 
 ```bash
 npm ci
+npm test
 npm run build
 node --check electron/main.cjs electron/preload.cjs electron/menu.cjs
 ```
@@ -56,15 +57,17 @@ To release, raise the version.
 
 <!-- RELEASES:END -->
 
-There is no automated test suite yet, so before pushing also:
+`npm test` (vitest) covers the game rules: `src/stores/gameStore.js` (scoring,
+tie-breaker, sudden death) and `src/utils/dateUtils.js` (answer checking,
+phase transitions). Run it before pushing, and add a test alongside any rule
+change. It does not touch the UI, so also:
 
 - play a round of each mode you touched, in the browser and, if you changed
   platform code, on that platform;
 - if you changed the rules, play a game through to the end, including a tie.
   The tie-breaker is where bugs have hidden before.
 
-Tests for `src/stores/gameStore.js` and `src/utils/dateUtils.js` would be a
-welcome contribution.
+Component and platform-integration tests would be a welcome contribution.
 
 ## Before you open a pull request
 

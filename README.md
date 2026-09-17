@@ -6,9 +6,9 @@
 
 <!-- BADGES:START -->
 ![React 19.2.4](https://img.shields.io/badge/React-19.2.4-61dafb?style=flat-square&logo=react)
-![Vite 7.3.1](https://img.shields.io/badge/Vite-7.3.1-646cff?style=flat-square&logo=vite)
+![Vite 7.3.6](https://img.shields.io/badge/Vite-7.3.6-646cff?style=flat-square&logo=vite)
 ![Capacitor 8.0.2](https://img.shields.io/badge/Capacitor-8.0.2-119eff?style=flat-square&logo=capacitor)
-![Electron 33.2.1](https://img.shields.io/badge/Electron-33.2.1-47848f?style=flat-square&logo=electron)
+![Electron 44.4.1](https://img.shields.io/badge/Electron-44.4.1-47848f?style=flat-square&logo=electron)
 [![Latest release](https://img.shields.io/github/v/release/geoffmyers/photo-guessing-game?style=flat-square&logo=github&label=release)](https://github.com/geoffmyers/photo-guessing-game/releases/latest)
 [![Licence GPL-3.0-or-later](https://img.shields.io/badge/licence-GPL--3.0--or--later-blue?style=flat-square)](LICENSE.md)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)

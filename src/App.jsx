@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import useGameStore from './stores/gameStore';
 import SetupScreen from './components/SetupScreen';
 import GameBoard from './components/GameBoard';
+import GitHubSourceLink from './components/GitHubSourceLink';
 import { GAME_CONFIG } from './data/constants';
 import { isElectron } from './services/platform';
 
@@ -51,6 +52,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <GitHubSourceLink />
     </div>
   );
 }

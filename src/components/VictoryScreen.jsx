@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, RefreshCw, Star, Crown, Sparkles } from 'lucide-react';
 import useGameStore from '../stores/gameStore';
@@ -15,12 +15,22 @@ const VictoryScreen = () => {
 
   const { playVictory } = useSoundEffects();
 
+  const titleId = 'victory-screen-title';
+  const playAgainButtonRef = useRef(null);
+
   // Play victory fanfare when screen appears
   useEffect(() => {
     if (winner) {
       playVictory();
     }
   }, [winner, playVictory]);
+
+  // Focus the primary action when the dialog opens.
+  useEffect(() => {
+    if (winner) {
+      playAgainButtonRef.current?.focus();
+    }
+  }, [winner]);
 
   // macOS desktop: post a Notification Center banner and bounce the dock once.
   useEffect(() => {
@@ -50,6 +60,9 @@ const VictoryScreen = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         className="fixed inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center z-50 p-4 overflow-hidden"
       >
         {/* Animated background stars */}
@@ -172,6 +185,7 @@ const VictoryScreen = () => {
 
           {/* Winner announcement with rainbow effect */}
           <motion.h1
+            id={titleId}
             className="text-5xl font-black mb-2 drop-shadow-lg"
             initial={{ opacity: 0, y: 20, scale: 0.5 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -250,6 +264,7 @@ const VictoryScreen = () => {
 
           {/* Play again button with shimmer effect */}
           <motion.button
+            ref={playAgainButtonRef}
             onClick={resetGame}
             className="relative flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg rounded-xl shadow-lg overflow-hidden group"
             whileHover={{ scale: 1.02, boxShadow: '0 10px 40px rgba(16,185,129,0.4)' }}

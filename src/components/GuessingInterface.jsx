@@ -43,7 +43,11 @@ const GuessingInterface = () => {
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
       {/* Progress indicator */}
-      <div className="flex items-center gap-2 mb-6">
+      <div
+        className="flex items-center gap-2 mb-6"
+        role="list"
+        aria-label="Guess progress"
+      >
         {steps.map((step, index) => (
           <div key={step.key} className="contents">
             <StepIndicator
@@ -113,6 +117,8 @@ const GuessingInterface = () => {
 const StepIndicator = ({ label, active, complete }) => {
   return (
     <motion.div
+      role="listitem"
+      aria-current={active ? 'step' : undefined}
       className={`
         flex flex-col items-center gap-1
         ${active ? 'text-white' : complete ? 'text-green-300' : 'text-white/40'}

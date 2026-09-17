@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: build
+  build-and-test:
+    name: build and test
     runs-on: ubuntu-latest
     container: node:22-bookworm
     timeout-minutes: 20
@@ -24,8 +24,9 @@ jobs:
         working-directory: .
     steps:
       - uses: actions/checkout@v6
-      - name: build
+      - name: build and test
         run: |
           npm ci
+          npm test
           npm run build
           node --check electron/main.cjs electron/preload.cjs electron/menu.cjs

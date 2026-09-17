@@ -19,7 +19,7 @@ pieces fit together.
 - **Icons**: lucide-react
 - **Audio**: Web Audio API (no audio files)
 - **Mobile**: Capacitor 8 (iOS 15+, Android API 24+; needs Node 22+, Xcode 26+)
-- **Desktop**: Electron 33 + electron-builder 25 (macOS 11+)
+- **Desktop**: Electron 44 + electron-builder 26 (macOS 11+)
 - **EXIF**: exifr 7
 - **Geocoding**: OpenStreetMap Nominatim, through `src/utils/geocoding.js`
 
@@ -68,7 +68,8 @@ src/
 │   ├── CitySelector.jsx    # ...cities from the whole library
 │   ├── FeedbackOverlay.jsx # Correct/wrong card with Continue
 │   ├── VictoryScreen.jsx   # Winner; macOS notification
-│   └── Confetti.jsx        # Particle animation
+│   ├── Confetti.jsx        # Particle animation
+│   └── GitHubSourceLink.jsx # Fixed "View source on GitHub" footer, shown on every screen
 ├── hooks/
 │   ├── useSoundEffects.js  # Web Audio synthesis
 │   └── useHaptics.js       # Capacitor Haptics (no-op on web and macOS)
@@ -80,8 +81,7 @@ src/
 ├── utils/
 │   ├── dateUtils.js        # Answer checking, points, phase order, answer choices
 │   ├── geocoding.js        # Nominatim URL + address → place (shared with the generator)
-│   ├── animations.js       # Framer Motion variants
-│   └── exifExtractor.js    # Unused older EXIF helper
+│   └── animations.js       # Framer Motion variants
 └── data/
     ├── game-config.json    # Rules and settings (the single source)
     └── constants.js        # GAME_CONFIG, built from game-config.json
@@ -161,9 +161,19 @@ npm run dist:mac:unsigned   # Same, without a signing identity
 npm run dist:mac:notarize   # Sign + notarize (APPLE_TEAM_ID etc.)
 npm run dist:mac:arm64      # Apple Silicon only
 npm run dist:mac:x64        # Intel only
+
+npm test                    # Run the vitest suite once
+npm run test:watch          # Same, in watch mode
+
+python3 scripts/generate-app-icon.py      # Rebuild build/icon.png
+python3 scripts/generate-native-assets.py # Re-render iOS AppIcon/Splash and
+                                           # Android mipmaps/splash from it
 ```
 
-There is no test suite or lint script; `npm run build` is the check.
+`npm test` covers the game rules (`src/stores/gameStore.js`,
+`src/utils/dateUtils.js`): scoring, phase transitions, and the tie-breaker /
+sudden-death state machine. There is no lint script; `npm run build` and
+`npm test` are the checks.
 
 ## Key Files to Understand
 
@@ -176,6 +186,8 @@ There is no test suite or lint script; `npm run build` is the check.
 | `src/services/exifService.js` | EXIF extraction and geocoding on the device |
 | `src/utils/geocoding.js` | Nominatim request + address parsing (web and apps) |
 | `scripts/generate-manifest.js` | Web photo manifest generator |
+| `scripts/generate-app-icon.py` | Renders `build/icon.png` (the real app icon) |
+| `scripts/generate-native-assets.py` | Renders iOS AppIcon/Splash + Android mipmap/splash from `build/icon.png`, in place, at every existing filename/size — run after changing the icon |
 | `capacitor.config.ts` | Mobile app configuration |
 | `electron/main.cjs` | Electron main process (window, IPC, `pgg-media://`) |
 | `electron/preload.cjs` | contextBridge exposing `window.electronAPI` |
@@ -259,14 +271,8 @@ Framer Motion animations run on the main thread. Animate `transform` and
 
 ## Gotchas
 
-- This project is published to GitHub (`geoffmyers/photo-guessing-game`) as a
-  snapshot. Each publish appends one commit to the public history. Publish with:
-  `scripts/publish-subtree-snapshot.sh --prefix=reactjs-projects/photo-guessing-game --publish`
-  Exclusions, metadata and the icon are declared in `scripts/subtree-publish.json`.
-- **NEVER run `git subtree push` or `git subtree split`.** A raw split has twice
-  pushed the entire mono-repo history — and the secrets in it — to a public remote
-  (see `docs/security/2026-02-04-` and `2026-05-12-credential-leak-audit.md`). A
-  pre-push hook now refuses it.
-- The README screenshots come from
-  `scripts/public-repo-docs/static-site-screenshots/photo-guessing-game.sh`
-  (CC0 photos, seeded shuffle), then `select.py photo-guessing-game`.
+- This project is developed in a private repository and published to
+  GitHub (`geoffmyers/photo-guessing-game`) as a snapshot: each publish adds one
+  commit. Pull requests are applied upstream first; see CONTRIBUTING.md.
+- The README screenshots are made by the maintainer's screenshot tooling,
+  outside this project (CC0 photos, seeded shuffle).
