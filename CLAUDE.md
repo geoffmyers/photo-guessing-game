@@ -165,9 +165,9 @@ npm run dist:mac:x64        # Intel only
 npm test                    # Run the vitest suite once
 npm run test:watch          # Same, in watch mode
 
-python3 scripts/generate-app-icon.py      # Rebuild build/icon.png
 python3 scripts/generate-native-assets.py # Re-render iOS AppIcon/Splash and
-                                           # Android mipmaps/splash from it
+                                           # Android mipmaps/splash from
+                                           # build/icon.png
 ```
 
 `npm test` covers the game rules (`src/stores/gameStore.js`,
@@ -186,8 +186,7 @@ sudden-death state machine. There is no lint script; `npm run build` and
 | `src/services/exifService.js` | EXIF extraction and geocoding on the device |
 | `src/utils/geocoding.js` | Nominatim request + address parsing (web and apps) |
 | `scripts/generate-manifest.js` | Web photo manifest generator |
-| `scripts/generate-app-icon.py` | Renders `build/icon.png` (the real app icon) |
-| `scripts/generate-native-assets.py` | Renders iOS AppIcon/Splash + Android mipmap/splash from `build/icon.png`, in place, at every existing filename/size — run after changing the icon |
+| `scripts/generate-native-assets.py` | Renders iOS AppIcon/Splash + Android mipmap/splash from `build/icon.png`, in place, at every existing filename/size — run after changing the icon. `build/icon.png` itself is written by the author's icon pipeline, which draws the same isometric icon for every project |
 | `capacitor.config.ts` | Mobile app configuration |
 | `electron/main.cjs` | Electron main process (window, IPC, `pgg-media://`) |
 | `electron/preload.cjs` | contextBridge exposing `window.electronAPI` |

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 Generate the iOS AppIcon/splash and Android mipmap/splash assets from
-build/icon.png (built by generate-app-icon.py).
+build/icon.png (written by the author's icon pipeline, which draws the
+same isometric icon for every project).
 
 Capacitor's `cap add ios` / `cap add android` scaffold these files as blank
 white placeholders; this script overwrites them in place with renders of the
 real app icon, at the exact filenames and pixel sizes Xcode/Android already
 expect (so no Contents.json / adaptive-icon XML needs to change).
 
-Run after generate-app-icon.py, whenever build/icon.png changes:
+Run whenever build/icon.png changes:
     python3 scripts/generate-native-assets.py
 """
 from pathlib import Path
@@ -20,14 +21,14 @@ SOURCE_ICON = ROOT / "build" / "icon.png"
 
 # Matches capacitor.config.ts (ios.backgroundColor / android.backgroundColor /
 # plugins.SplashScreen.backgroundColor) and the Electron main window's
-# backgroundColor, and generate-app-icon.py's gradient start color.
+# backgroundColor.
 BRAND_BG = (30, 58, 95)  # #1e3a5f
 
 
 def load_source():
     if not SOURCE_ICON.exists():
         raise SystemExit(
-            f"{SOURCE_ICON} not found — run scripts/generate-app-icon.py first"
+            f"{SOURCE_ICON} not found"
         )
     return Image.open(SOURCE_ICON).convert("RGBA")
 

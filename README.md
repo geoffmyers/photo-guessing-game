@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="build/icon.png" width="96" height="96" alt="Photo Guessing Game icon">
+  <img src="docs/icon.svg" width="256" height="256" alt="Photo Guessing Game icon">
 </p>
 
 # Photo Guessing Game
